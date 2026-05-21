@@ -1,0 +1,25 @@
+-- Wait for the game to fully load before running to prevent crashes
+repeat task.wait() until game:IsLoaded()
+
+local LogService = game:GetService("LogService")
+local UNIQUE_SERVER_FLAG = "ChorbiV4_Server_Locked" 
+
+-- Check if someone else already ran it on this server
+local alreadyExecuted = false
+for _, log in ipairs(LogService:GetLogHistory()) do
+    if log.message == UNIQUE_SERVER_FLAG then
+        alreadyExecuted = true
+        break
+    end
+end
+
+if alreadyExecuted then
+    print("ChorbiV4 has already been executed on this server!")
+    return
+end
+
+-- Stamp the server log so it doesn't run twice here
+print(UNIQUE_SERVER_FLAG)
+
+-- Run your updated hub script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tareqmahmudtax-ship-it/NabILuiV4-CHORBI-V4/refs/heads/main/Fjrf"))()
